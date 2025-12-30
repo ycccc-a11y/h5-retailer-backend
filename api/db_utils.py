@@ -14,7 +14,10 @@ DB_CONFIG = {
     'charset': 'utf8mb4',
     'connect_timeout': 10,
     'read_timeout': 30,
-    'write_timeout': 30
+    'write_timeout': 30,
+    'ssl': {'ssl_mode': 'PREFERRED'},
+    'ssl_verify_cert': False,
+    'ssl_verify_identity': False
 }
 
 # 缓存自动识别到的表名与纬度列名
