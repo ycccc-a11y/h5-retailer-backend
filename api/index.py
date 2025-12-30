@@ -5,7 +5,6 @@ from http.server import BaseHTTPRequestHandler
 import json
 import sys
 import os
-import urllib.parse
 
 # 添加当前目录到路径
 sys.path.insert(0, os.path.dirname(__file__))
@@ -15,29 +14,16 @@ from amap_utils import plan_route_with_amap
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         """处理GET请求"""
-        parsed_path = urllib.parse.urlparse(self.path)
-        path = parsed_path.path
-        
-        # 简单的路由
-        if path == '/api' or path == '/api/':
-            self.send_response(200)
-            self.send_header('Content-type', 'application/json')
-            self.send_header('Access-Control-Allow-Origin', '*')
-            self.end_headers()
-            response = {
-                'status': 'ok',
-                'message': 'H5 Retailer Backend API',
-                'endpoints': [
-                    'POST /api/index - Route planning'
-                ]
-            }
-            self.wfile.write(json.dumps(response, ensure_ascii=False).encode('utf-8'))
-        else:
-            self.send_response(404)
-            self.send_header('Content-type', 'application/json')
-            self.send_header('Access-Control-Allow-Origin', '*')
-            self.end_headers()
-            self.wfile.write(json.dumps({'error': 'Not found'}).encode('utf-8'))
+        self.send_response(200)
+        self.send_header('Content-type', 'application/json')
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.end_headers()
+        response = {
+            'status': 'ok',
+            'message': 'H5 Retailer Backend API - Route Planning',
+            'usage': 'POST with JSON body: {"points": [...], "strategy": "1"}'
+        }
+        self.wfile.write(json.dumps(response, ensure_ascii=False).encode('utf-8'))
     
     def do_POST(self):
         """处理POST请求 - 路线规划"""
