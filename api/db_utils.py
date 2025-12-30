@@ -22,7 +22,7 @@ DB_CONFIG = {
 
 # 缓存自动识别到的表名与纬度列名
 DETECTED_TABLE_NAME = 'tobacco_retailers'
-DETECTED_LAT_COLUMN = '维度'
+DETECTED_LAT_COLUMN = '纬度'
 
 def get_db_connection():
     """获取数据库连接"""
