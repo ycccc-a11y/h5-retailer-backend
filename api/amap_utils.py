@@ -224,8 +224,15 @@ def plan_route_with_amap(points, strategy='1'):
         total_distance += segment_result['distance']
         total_duration += segment_result['duration']
     
+    # 合并所有segments的polyline坐标为line数组
+    line = []
+    for segment in segments:
+        if segment.get('polyline'):
+            line.extend(segment['polyline'])
+    
     return {
         'distance': round(total_distance, 2),
         'duration': round(total_duration, 1),
-        'segments': segments
+        'segments': segments,
+        'line': line  # 添加line字段供前端使用
     }
